@@ -2,6 +2,17 @@
 # Full project: https://gitlab.com/pages/plain-html
 pages:
   stage: deploy
+  
+  
+  test_linter:
+  stage: .post
+  image: node:latest
+  script:
+    - npm install eslint --save-dev
+    - npx eslint *.js
+
+
+
   script:
     - mkdir .public
     - cp -r * .public
