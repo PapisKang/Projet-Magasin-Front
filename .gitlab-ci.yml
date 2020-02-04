@@ -1,8 +1,7 @@
-# This file is a template, and might need editing before it works on your project.
-# Full project: https://gitlab.com/pages/plain-html
-pages:
-  stage: deploy
- 
+stages:
+  - build
+
+build:
   script:
     - mkdir .public
     - cp -r * .public
@@ -12,11 +11,10 @@ pages:
       - public
   only:
     - master
-
-  test_linter:
-    stage: .post
-    image: node:latest
-    script:
-        - npm install eslint --save-dev
-        - npx eslint *.js
-
+    
+test_linter:
+  stage: .post
+  image: node:latest
+  script:
+    - npm install eslint --save-dev
+    - npx eslint *.js
