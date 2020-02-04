@@ -2,6 +2,7 @@ stages:
   - build
 
 build:
+  stage: build
   script:
     - mkdir .public
     - cp -r * .public
