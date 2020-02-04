@@ -1,0 +1,68 @@
+
+<ng-container *ngFor="let produit of stocks">
+  <div align="center">
+    <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h6 text-gray-900 mb-4">{{ produit.nom }} {{ produit.categorie }} </h1>
+                    <h1 class="h6 text-gray-900 mb-4">{{ produit.valeur }} euros</h1>
+                  </div>
+                    <button class="btn btn-primary btn-user btn-block" (click)="addProduit(produit)" type="submit" id="buttonajouterPanier" value="buttonajouterPanier" name="buttonajouterPanier">
+                      Ajouter au panier
+                    </button>
+
+                </div>
+              </div>
+
+  </div>
+  </ng-container>
+
+
+  <hr class="sidebar-divider my-3">
+  <hr class="sidebar-divider my-3">
+
+  <div *ngIf="panier.length != 0" align="center">
+    <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">
+
+						<p>Votre panier contient {{ panier.length }} article(s).</p>
+						<p>Un total de {{ prixtotal }} euros </p>
+
+
+                    </h1>
+                  </div>
+
+                 <table>
+  					<tr>
+
+    					<th> Produit </th>
+    					<th>categorie</th>
+    					<th>Prix</th>
+    					<th>Quantite</th>
+ 				 	</tr>
+ 				 	<ng-container *ngFor="let itempanier of panier">
+
+  					<tr>
+    					<td>{{itempanier.produit.nom}}</td>
+    					<td>{{itempanier.produit.categorie}}</td>
+    					<td> {{itempanier.produit.valeur}} euros</td>
+    					<td>
+                <input type="number" name="idProduitqte" [(ngModel)]="itempanier.quantite" (ngModelChange)="calculTotal()" min="0" max="{{itempanier.produit.quantite}}" value="{{itempanier.quantite}}" >
+                <p style="color:red;">max {{itempanier.produit.quantite}}</p>
+    					</td>
+
+
+  					</tr>
+  					</ng-container>
+				</table>
+
+                </div>
+                <button class="btn btn-primary btn-user btn-block" (click)="addVente()" type="submit" id="buttonajouterPanier" value="buttonajouterPanier" name="buttonajouterPanier">
+                  Valider panier
+                </button>
+
+              </div>
+
+           </div>

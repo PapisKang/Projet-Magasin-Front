@@ -1,0 +1,68 @@
+<div align="center">
+    <div class="col-lg-6">
+                <div class="p-5">
+                  <div *ngIf="vente!=undefined"  >
+                     <h2 class="m-0 font-weight-bold text-primary">Nombre total de ventes :  {{vente.length}}</h2>
+                   </div>
+                   <hr/>
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">choisir commande à afficher</h1>
+                  </div>
+                    <div class="form-group">
+                        <select name="venteSelected" [(ngModel)]="venteSelected" (ngModelChange)="getInfoVente()"  required>
+                            <ng-container *ngFor="let item of vente">
+                                <option value="{{ item.id }}">Commande n° {{ item.id}} du {{item.dates}}  </option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+              </div>
+
+           </div>
+
+<div *ngIf="venteSelected!=null && venteSelected!='' && venteActuel!=undefined" class="card shadow mb-4">
+           <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Commande numero {{ venteSelected}}</h6>
+              <h6 class="m-0 font-weight-bold text-primary"> TTC {{ venteActuel.prix_total}} euros</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      	<th> Produit </th>
+    					<th>categorie</th>
+    					<th>Prix(euros)</th>
+    					<th>Quantite</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <ng-container *ngFor="let item of info">
+
+
+  					<tr>
+    					<td>{{item.nom}}</td>
+              <td>{{item.categorie}}</td>
+              <td>{{item.valeur}}</td>
+              <td>{{item.quantite}}</td>
+
+
+  					</tr>
+  					</ng-container>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="vente!=undefined && vente.length==0 "  align="center">
+              <div class="col-lg-6">
+                    <div class="text-center">
+                              <h1 class="h4 text-gray-900 mb-4">Aucune Commande enregistree</h1>
+                    </div>
+
+              </div>
+          </div>

@@ -1,0 +1,67 @@
+<div align="center">
+    <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Modifier Produit / Supprimer Produit</h1>
+                  </div>
+                    <div class="form-group">
+                        <select name="productSelect"  [(ngModel)]="produitSelected" required>
+                            <ng-container *ngFor="let produit of produits">
+                                <option value="{{ produit.id }}">{{ produit.nom }} </option>
+                            </ng-container>
+                        </select>
+                    </div>
+                  <button class="btn btn-primary btn-user btn-block" type="submit" id="buttonajouterCateg" (click)="modifierProduit()" value="buttonajouterCateg" name="buttonajouterCateg">
+                    Modifier
+                  </button>
+                  <button class="btn btn-primary btn-user btn-block" type="submit"  (click)="supprimerProduit()" id="buttonajouterCateg" value="buttonajouterCateg" name="buttonajouterCateg">
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+
+           </div>
+
+       <div align="center">
+    <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 *ngIf="!modifierprod" class="h4 text-gray-900 mb-4">Ajouter Produit </h1>
+                    <h1 *ngIf="modifierprod" class="h4 text-gray-900 mb-4">Modifier Produit (Prix / Stock) </h1>
+                  </div>
+                  <form ngNativeValidate class="user">
+                    <div class="form-group">
+                      <input type="text" title="Nom produit" class="form-control form-control-user" [readonly]="modifierprod" name="inputProdname" [(ngModel)]="inputProdname" (ngModelChange)="checkNomProduit()"   placeholder="Nom produit" required>
+                      <p *ngIf="!modifierprod && !nomPoduitisOK && inputProdname!=null && inputProdname!=''" style="color:red;">Produit existe deja</p>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" title="Categorie produit" class="form-control form-control-user" name="inputCategname"  [readonly]="modifierprod" [(ngModel)]="inputCategname"  placeholder="Categorie" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="date" id="start" name="dateDeb" [(ngModel)]="dateDeb" [readonly]="modifierprod" (ngModelChange)="checkDateDeb()" value="" min="2020-02-02" max="2022-02-02"  title="Date début" placeholder="Date début" class="form-control form-control-user" name="dateDeb" required>
+                      <p *ngIf="!modifierprod && !DateDebisOK && dateDeb!=null && dateDeb!=''" style="color:red;"> Date début insérée antérieure à date d'aujourdhui</p>
+                    </div>
+                    <div class="form-group">
+                      <input type="date" id="end" name="dateFin" [(ngModel)]="dateFin" [readonly]="modifierprod" (ngModelChange)="checkDateFin()" value="" min="2020-02-02" max="2022-02-02" title="Date fin" placeholder="Date fin" class="form-control form-control-user" name="dateFin"  required>
+                      <p *ngIf="!modifierprod && !DateFinisOK && dateFin!=null && dateFin!=''" style="color:red;">Date fin antérieure à date début </p>
+                    </div>
+                    <div class="form-group">
+                      <input type="number" class="form-control form-control-user" [(ngModel)]="inputProdprice" step="0.1" min="1"   name="inputProdprice"  (ngModelChange)="checkAllInput()" title="Prix produit" placeholder="Prix produit" required>
+                    </div>
+
+                    <div class="form-group">
+                      <input type="number" class="form-control form-control-user" name="inputProdStock" min="1" [(ngModel)]="inputProdStock" (ngModelChange)="checkAllInput()" title="Stock"  placeholder="Stock" required>
+                    </div>
+
+                    <button *ngIf="!modifierprod" class="btn btn-primary btn-user btn-block" type="submit" id="buttonajouterProd" (click)="ajouterProduit()"  name="buttonaddProd" [disabled]="!allInputisOK">
+                      Ajouter
+                    </button>
+                    <button *ngIf="modifierprod" class="btn btn-primary btn-user btn-block" type="submit" id="buttonajouterProd" (click)="updateProduit()" name="buttonmodifProd" >
+                      Modifier
+                    </button>
+
+                  </form>
+                </div>
+              </div>
+
+           </div>
